@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+         */
+    </style>
+</head>
+
+<body>
+    <!-- 登入輸入區 -->
+    <input type="text" id="nickname">
+    <button onclick="login()">登入</button>
+    <hr>
+    <!-- 私訊對象輸入區 -->
+    <input type="text" id="receiver"><span> 請輸入悄悄話對象，未輸入則為廣播</span>
+    <hr>
+    <!-- 發送內容區 -->
+    <div>發送內容</div>
+    <textarea name="" id="content" cols="30" rows="10"></textarea>
+    <hr>
+    <!-- 聊天訊息區 -->
+    <div>聊天訊息</div>
+    <ul id="list" style="border:1px solid red;"></ul>
+    <hr>
+    <button onclick=" send() ">發送</button>
+</body>
+<!-- 輔入socket -->
+<!-- <script src="/socket.io/socket.io.js "></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+    let socket;
+    let login_flag;
+
+    function login() { //登入
+        socket = io({
+            query: {
+                nickname: nickname.value, //依客戶輸入，給nickname賦值
+            }
+        });
+        if (!login_flag) { //第一次登入設定
+            //提示該客戶上線
+            let li = document.createElement("li");
+            li.innerHTML = "【系統】 " + '您上線了..';
+            list.appendChild(li);
+
+            //監聽server connection事件
+            socket.on('connection', (msg) => {
+                //當有其它客戶上線，會提示在聊天訊息區
+                let li = document.createElement("li");
+                li.innerHTML = msg;
+                list.appendChild(li);
+            })
+
+            //監聽server msg事件
+            socket.on('msg', (msg) => {
+                //接受server傳過來的聊天內容訊息
+                let li = document.createElement("li");
+                li.innerHTML = msg;
+                list.appendChild(li);
+                console.log(msg);
+            });
+
+            socket.on('offline', (msg) => {
+                //接受server傳過來的下線訊息
+                let li = document.createElement("li");
+                li.innerHTML = msg;
+                list.appendChild(li);
+            });
+        }
+        login_flag = true;
+    }
+
+
+    function send() { //發送所要傳送的訊息
+        if (login_flag) { //要登入才能使用
+            socket.emit('chat', { //傳送客戶輸入的 接收者及訊息
+                receiver: receiver.value,
+                msg: content.value,
+            });
+            let li = document.createElement("li");
+            if (receiver.value) { //若為稍稍話時
+                li.innerHTML = "【悄悄話】 " + "您對" + receiver.value + "說: " + content.value;
+            } else { //若為廣播時
+                li.innerHTML = "【廣播】 " + "您說: " + content.value;
+            }
+            list.appendChild(li);
+        } else {
+            let li = document.createElement("li");
+            li.innerHTML = '請先登入...';
+            list.appendChild(li);
+        }
+    }
+</script>
+
+</html>
