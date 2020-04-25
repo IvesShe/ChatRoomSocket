@@ -1,7 +1,7 @@
 # Socket聊天室(node.js + socket)
 
   ## Server端相關安裝
-  ```node
+  ```
   npm init -y
   npm install express@4.15.2
   npm i socket.io --save
