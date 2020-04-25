@@ -1,6 +1,6 @@
-# Socket聊天室
+# Socket聊天室(node.js + socket)
 
-  ## Server相關安裝
+  ## Server端相關安裝
   ```
   npm init -y
   npm install express@4.15.2
