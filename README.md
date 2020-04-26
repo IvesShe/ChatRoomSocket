@@ -1,4 +1,4 @@
-# Socket聊天室(node.js + socket)
+# Socket聊天室(node.js + socket.)
 
   ## Server端相關安裝
   ```
@@ -15,3 +15,13 @@
 
   ## 頁面DEMO(僅展示)
   https://ivesshe.github.io/ChatRoomSocket/
+
+<center class="half">
+   <img src="https://github.com/IvesShe/CocosCreatorDemo/blob/master/image/2/1587887833641.jpg?raw=true" width="500"/>
+</center>
+<center class="half">
+    <img src="https://github.com/IvesShe/CocosCreatorDemo/blob/master/image/2/1587887809221.jpg?raw=true" width="500"/>
+</center>
+<center class="half">
+    <img src="https://github.com/IvesShe/CocosCreatorDemo/blob/master/image/2/1587887797059.jpg?raw=true" width="500"/>
+</center>
