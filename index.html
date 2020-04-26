@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    h1>Node.js + Socket.io 聊天室</h1>
+    <h1>Socket聊天室(node.js + socket.io)</h1>
     <!-- 登入輸入區 -->
     <input type="text" id="nickname">
     <button onclick="login()">登入</button>
@@ -25,12 +25,14 @@
     <!-- 發送內容區 -->
     <div>發送內容</div>
     <textarea name="" id="content" cols="30" rows="10"></textarea>
+    <br>
+    <button onclick=" send() ">發送</button>
     <hr>
     <!-- 聊天訊息區 -->
     <div>聊天訊息</div>
     <ul id="list" style="border:1px solid red;"></ul>
     <hr>
-    <button onclick=" send() ">發送</button>
+
 </body>
 <!-- 輔入socket -->
 <!-- <script src="/socket.io/socket.io.js "></script> -->
